@@ -20,7 +20,7 @@ To connect to the DB, modify utilities/dbconn.php
 
 ### Key Structure
 
-The system implemented uses a home page, a main results page, and a page for the display of a single employees data.
+The system implemented uses a home page, a main results page, and a page for the display of a single employee's data.
 
 
 #### Further notes
