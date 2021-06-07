@@ -14,7 +14,7 @@ This uses the DB from https://dev.mysql.com/doc/employee/en/ so please follow th
 
 ## Deployment for testing
 
-The whole repository can be deployed to a domain, sub domain, VirtualHost.
+The whole repository can be deployed to a domain, sub domain, or VirtualHost.
 
 To connect to the DB, modify utilities/dbconn.php
 
