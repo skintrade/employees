@@ -1,0 +1,8 @@
+.btngroup {
+    a, :visited {
+    color: $black;
+    }
+    a.btn-invert {
+        color: $silver;
+    }
+}

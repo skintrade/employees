@@ -1,0 +1,200 @@
+// zero-box
+// background-clip
+// box-radius()
+// circular
+// drop shadow()
+// basetransition()
+// hyphenate
+// hidden
+// button generator
+
+
+
+// zero margin and padding - use instead of including 2 seperate mixins where useful
+@mixin zero-box {
+    margin  : 0;
+    padding : 0;
+}
+
+// clip BGs
+@mixin background-clip {
+    -webkit-background-clip: padding-box;
+    -moz-background-clip: padding-box;
+    background-clip       : padding-box;
+}
+
+
+// curved corners
+//
+// EXAMPLE USAGE -
+// @include box-radius(1,2,3,4);
+// @include box-radius(1);
+//
+@mixin box-radius($values...) {
+    @include sizing(rem, -webkit-border-radius, $values...);
+    @include sizing(rem, border-radius, $values...);
+    @include background-clip;
+}
+
+// circularize!!
+//
+// EXAMPLE USAGE -
+// @include circular();
+//
+@mixin circular() {
+    -webkit-border-radius : percentage(1);
+    border-radius         : percentage(1);
+    @include background-clip;
+}
+
+// squarify!
+// if you need to force a square shape
+//
+@mixin squared($size : 10px) {
+    width  : $size;
+    height : $size;
+}
+
+// drop shadow
+//
+// EXAMPLE USAGE -
+// @include box-shadow(5px 5px 10px 0 rgba(0,0,0,1));
+// @include box-shadow(5px 5px 10px 0 #000);
+//
+@mixin box-shadow($sh-hor : 5px, $sh-ver : 5px, $sh-blur : 10px, $sh-sprd : 0, $sh-col : rgba(0,0,0,1)) {
+    -webkit-box-shadow : $sh-hor $sh-ver $sh-blur $sh-sprd $sh-col; // iOS <4.3 & Android <4.1
+    box-shadow         : $sh-hor $sh-ver $sh-blur $sh-sprd $sh-col;
+}
+
+// animation
+// general transition base
+//
+// EXAMPLE USAGE -
+// @include include basetransition(color, .3s, ease-in-out, 0);
+// @include include basetransition(all, 1s, ease-in, 1s);
+//
+@mixin basetransition($what : all, $time : .5s, $easing : ease-in-out, $delay : 0) {
+    -o-transition      : $what $time $easing $delay;
+    -moz-transition    : $what $time $easing $delay;
+    -webkit-transition : $what $time $easing $delay;
+    transition         : $what $time $easing $delay;
+}
+//
+// 2D Transformations
+//
+@mixin rotate($degrees) {
+    -webkit-transform: rotate($degrees);
+    -moz-transform: rotate($degrees);
+    -ms-transform: rotate($degrees);
+    -o-transform: rotate($degrees);
+    transform: rotate($degrees);
+}
+
+@mixin scale($ratio) {
+    -webkit-transform: scale($ratio);
+    -moz-transform: scale($ratio);
+    -ms-transform: scale($ratio);
+    -o-transform: scale($ratio);
+    transform: scale($ratio);
+}
+
+@mixin translate($x : 0, $y : 0) {
+    -webkit-transform: translate($x, $y);
+    -moz-transform: translate($x, $y);
+    -ms-transform: translate($x, $y);
+    -o-transform: translate($x, $y);
+    transform: translate($x, $y);
+}
+
+@mixin skew($x : 0, $y : 0) {
+    -webkit-transform: skew($x, $y);
+    -moz-transform: skew($x, $y);
+    -ms-transform: skew($x, $y);
+    -o-transform: skew($x, $y);
+    transform: skew($x, $y);
+}
+
+@mixin translate3d($x : 0, $y : 0, $z : 0) {
+    -webkit-transform: translate($x, $y, $z);
+    -moz-transform: translate($x, $y, $z);
+    -ms-transform: translate($x, $y, $z);
+    -o-transform: translate($x, $y, $z);
+    transform: translate($x, $y, $z);
+}
+
+
+// hyphenation
+@mixin hyphenate() {
+    white-space              : pre;
+    white-space              : pre-wrap;
+    word-wrap                : break-word;
+
+    -epub-word-break         : break-all;
+    -ms-word-break           : break-all;
+    word-break               : break-all;
+    //word-break               : break-word; // Non standard for webkit
+
+    -webkit-hyphens          : auto;
+    -epub-hyphens             : auto;
+    -moz-hyphens             : auto;
+    hyphens                  : auto;
+
+    -webkit-hyphenate-before : 2;
+    -webkit-hyphenate-after  : 3;
+    hyphenate-lines          : 3;
+}
+
+// hide
+@mixin hidden() {
+    display : none;
+}
+
+//button generation
+//
+@mixin buttonOff($usage, $colour) {
+    $fontColour : $white;
+    @if $colour == $white {
+        $fontColour : (darken($colour, 80%));
+    }
+    @if $colour == $yellow {
+        $fontColour : (darken($colour, 80%));
+    }
+    .btn-#{$usage} {
+        background : $colour;
+        border     : 1px solid darken($colour, 10%);
+        color      : $fontColour;
+    }
+}
+
+@mixin buttonOn($usage, $colour) {
+    $fontColour : $white;
+    @if $colour == $white {
+        $fontColour : (darken($colour, 80%));
+    }
+    .btn-#{$usage}:hover {
+        background : darken($colour, 20%);
+        border     : 1px solid darken($colour, 30%);
+        @if $colour == $yellow {
+            color : $fontColour;
+        }
+    }
+}
+
+@mixin buttonType($usage, $colour) {
+    @include buttonOff($usage, $colour);
+    @include buttonOn($usage, $colour);
+}
+
+@mixin buttonSize($sizeClass, $size, $corners) {
+    $cornerSize : 0;
+    $pad-v : ($size * .6);
+    $pad-h : ($size * 1.2);
+    @if $corners == true {
+        $cornerSize : (.6 * $size);
+    }
+    .btn-#{$sizeClass} {
+        @include box-radius($cornerSize);
+        @include sizing(rem, font-size, $size);
+        @include sizing(rem, padding, $pad-v, $pad-h);
+    }
+}

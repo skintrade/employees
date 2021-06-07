@@ -1,0 +1,37 @@
+// baseline link normalise
+
+a {
+    text-decoration : none;
+    @include basetransition(color, .3s, ease-in-out, 0);
+
+    &:link {
+        color : $purple;
+    }
+
+    &:visited {
+        color : $purple;
+    }
+
+    &:hover {
+        color : $maroon;
+    }
+
+    &:active {
+        color : $maroon;
+    }
+
+    &:link,
+    &:hover,
+    &:active {
+        @include basetransition(color, .3s, ease-in-out, 0);
+    }
+
+    &:focus {
+        outline : thin dotted;
+    }
+
+    &:active,
+    &:hover {
+        @include sizing(rem, outline, 0);
+    }
+}

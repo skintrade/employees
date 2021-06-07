@@ -1,0 +1,54 @@
+//main grid definition
+
+.container {
+    @include container();
+    @media (min-width : $screen-md-min) {
+        @include container($screen-sm);
+    }
+    @media (min-width : $screen-lg-min) {
+        @include container($screen-md);
+    }
+    @media (min-width : $screen-xl-min) {
+        @include container($screen-lg);
+    }
+}
+
+.container-fluid {
+    @include container();
+}
+
+.row {
+    @include make-hor-container();
+}
+
+// make the columns
+
+@include make-grid-full(xs);
+@include make-grid-full(sm);
+@include make-grid-full(md);
+@include make-grid-full(lg);
+
+@media (min-width : $screen-sm-min) {
+    @include make-grid(sm);
+}
+@media (min-width : $screen-md-min) {
+    @include make-grid(md);
+}
+@media (min-width : $screen-lg-min) {
+    @include make-grid(lg);
+}
+
+// set for all columns
+*[class*='col-'] {
+    float         : left;
+    min-height    : 1px;
+    @include sizing(rem, padding-left, ($grid-gutter-width / 2));
+    @include sizing(rem, padding-right, ($grid-gutter-width / 2));
+    position      : relative;
+}
+
+
+.spacerVert {
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+}

@@ -1,0 +1,82 @@
+.boxalpha {
+    border  : 1px solid #000;
+    padding : 10px;
+}
+.newBox {
+    @include squared(20px);
+    @include box-shadow;
+}
+
+.userListing {
+    thead th {
+        background: $darkGray;
+        color: $white;
+    }
+    tbody tr:nth-child(even) {
+        background: $white;
+    }
+    th, td{
+        padding: 6px 4px;
+    }
+}
+
+
+.centerify {
+    margin: auto;
+    text-align: center;
+}
+
+.masterContainer {
+    margin:  20px 0
+}
+
+.empSearch {
+    label,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="week"],
+    input[type="month"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    textarea,
+    select {
+        width: 100%;
+        @include box-radius(4);
+    }
+}
+.empSortOpt {
+    label,
+    input[type="text"],
+    input[type="email"],
+    input[type="password"],
+    input[type="date"],
+    input[type="datetime"],
+    input[type="datetime-local"],
+    input[type="week"],
+    input[type="month"],
+    input[type="number"],
+    input[type="tel"],
+    input[type="url"],
+    input[type="search"],
+    textarea,
+    select {
+        width: auto;
+        @include box-radius(4);
+    }
+    .input-row {
+        padding: 0 1rem;
+        .innerDiv {
+            padding-right: 1rem;
+        }
+    }
+}
+
+.mainName{
+    display: inline-block;
+}

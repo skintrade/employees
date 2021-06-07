@@ -1,0 +1,11 @@
+.public-header {
+    background: $gray;
+}
+.loggedin-header {
+    background: $darkGray;
+}
+
+.public-header,
+.loggedin-header {
+    overflow : auto;
+}

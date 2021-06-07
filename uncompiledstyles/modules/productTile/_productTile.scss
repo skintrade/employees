@@ -1,0 +1,28 @@
+.product-tile-list,
+.product-tile-grid{
+    border: 1px solid $darkGray;
+    overflow: auto;
+}
+.product-tile-grid{
+    text-align: center;
+}
+.product-tile-image {
+    margin: 0 auto;
+    max-width: 100%;
+
+}
+.product-tile-list {
+    .product-tile-image {
+        float: left;
+    }
+    .product-tile-main {
+        float: left;
+        margin-left: $grid-gutter-width;
+    }
+    margin-bottom: $grid-gutter-width;
+}
+
+.product-tile-title {}
+.product-tile-copy {}
+.product-tile-price {}
+.product-tile-footer {}
