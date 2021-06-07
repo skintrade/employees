@@ -15,7 +15,7 @@
             <p>Current Role start date: <?php echo $stitlefrom?></p>
             <p>Current Salary: <?php echo $ssalary?> p.a.</p>
             <?php if ($smanager != $semp_no ) : ?>
-            <p>Department Manager : <a href="about?emp=<?php echo $smanager?>" ><?php echo $smanfullname?></a> (from <?php echo $smansince?>)</p>
+            <p>Department Manager : <a href="employee?emp=<?php echo $smanager?>" ><?php echo $smanfullname?></a> (from <?php echo $smansince?>)</p>
             <?php endif; ?>
         </div>
     </div>
