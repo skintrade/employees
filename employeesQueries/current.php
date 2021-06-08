@@ -1,8 +1,6 @@
 <?php
 
-
 include ('./employeesQueries/filterSets.php');
-
 
 //pagination of records
 if (isset($_GET['pageno'])) {
