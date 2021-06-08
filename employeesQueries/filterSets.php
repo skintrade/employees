@@ -68,9 +68,6 @@ elseif (!isset($_GET['empno'])) {
 // basic sorters
 if (isset($_GET['sortby'])) {
     $varTag = $_GET['sortby'];
-
-    //$varTags = array("emp_no","first","last","role","dept");
-
     if (isset($varTag)) {
         if (in_array($varTag, $varTags)) {
             $varTag = $varTag;
@@ -78,7 +75,6 @@ if (isset($_GET['sortby'])) {
             $varTag = 'emp_no';
         }
     }
-
     if ($varTag == 'emp_no') {
         $sort_1 = 'employees1.emp_no ASC';
     }
@@ -122,7 +118,6 @@ else {
 }
 if (isset($_GET['d'])){
     $dTag = $_GET['d'];
-    //$varTags = array("emp_no","first","last","role","dept");
     if (isset($dTag)) {
         if (in_array($dTag, $deptsArray)) {
             $disset = $dTag;
@@ -130,7 +125,6 @@ if (isset($_GET['d'])){
             $disset = '';
         }
     }
-    //$disset = $_GET['d'];
 }
 else {
     $disset = '';

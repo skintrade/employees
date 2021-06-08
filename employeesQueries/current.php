@@ -11,9 +11,13 @@ if (isset($_GET['pageno'])) {
     else
     {
         $clnpageno = preg_replace('/\D/','', $_GET['pageno']);
-        $pageno = $clnpageno;
+        if (is_numeric ($clnpageno)){
+            $pageno = $clnpageno;
+        }
+        else {
+            $pageno = 1;
+        }
     }
-    //$pageno = $_GET['pageno'];
 } else {
     $pageno = 1;
 }

@@ -52,10 +52,10 @@
     <div  class="input-row row">
         <div class="col-sm-12">
             <div class="centerify">
-                <input id="saveForm" class="button_text btn" type="submit" name="submit" value="Submit" />
+                <input id="saveForm" class="button_text btn" type="submit"  />
                 <a class="button btn" type='reset' id="sreset" value='Reset' name='reset' disabled>Reset</a>
             </div>
-            <input type="hidden" name="form_id" value="mmdev" />
+            <input type="hidden" name="form_id" value="mmdev" disabled="disabled"/>
         </div>
     </div>
 </form>
