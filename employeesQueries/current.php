@@ -6,7 +6,16 @@ include ('./employeesQueries/filterSets.php');
 
 //pagination of records
 if (isset($_GET['pageno'])) {
-    $pageno = $_GET['pageno'];
+    if (is_numeric($_GET['pageno']))
+    {
+        $pageno = $_GET['pageno'];
+    }
+    else
+    {
+        $clnpageno = preg_replace('/\D/','', $_GET['pageno']);
+        $pageno = $clnpageno;
+    }
+    //$pageno = $_GET['pageno'];
 } else {
     $pageno = 1;
 }

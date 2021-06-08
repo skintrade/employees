@@ -1,7 +1,14 @@
 <?php
 include ('./employeesQueries/filterSets.php') ;
+//$varTags = array("emp_no","first","last","role","dept");
 if (isset($varTag)) {
-    $varTag = $varTag;
+    if (in_array($varTag, $varTags)) {
+        //echo 'ok';
+        $varTag = $varTag;
+    } else {
+        //echo 'not ok';
+        $varTag = '';
+    }
 }
 else {
     $varTag = '';

@@ -7,13 +7,13 @@
     <div>
         <div class="input-row row">
             <div class="col-sm-4">
-            <label class="description" for="freename1">First Name</label> <input id="freename1" class="f_free" name="firstname" type="text" maxlength="255" value="<?php echo $fnisset ?>"/>
+            <label class="description" for="freename1">First Name</label> <input id="freename1" class="f_free" name="firstname" type="text" maxlength="255" value="<?php echo htmlspecialchars($fnisset) ?>"/>
         </div>
         <div class="col-sm-4">
-            <label class="description" for="freename2">Last Name</label><input id="freename2" class="f_free" name="lastname" type="text" maxlength="255" value="<?php echo $lnisset ?>"/>
+            <label class="description" for="freename2">Last Name</label><input id="freename2" class="f_free" name="lastname" type="text" maxlength="255" value="<?php echo htmlspecialchars($lnisset) ?>"/>
         </div>
         <div class="col-sm-4">
-            <label class="description" for="empno">Employee Number</label><input id="empno" class="f_free" name="empno" type="text" maxlength="255" value="<?php echo $enisset ?>"/>
+            <label class="description" for="empno">Employee Number</label><input id="empno" class="f_free" name="empno" type="text" maxlength="255" value="<?php echo htmlspecialchars($enisset) ?>"/>
         </div>
         </div>
     </div>

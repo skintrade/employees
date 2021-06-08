@@ -68,6 +68,17 @@ elseif (!isset($_GET['empno'])) {
 // basic sorters
 if (isset($_GET['sortby'])) {
     $varTag = $_GET['sortby'];
+
+    //$varTags = array("emp_no","first","last","role","dept");
+
+    if (isset($varTag)) {
+        if (in_array($varTag, $varTags)) {
+            $varTag = $varTag;
+        } else {
+            $varTag = 'emp_no';
+        }
+    }
+
     if ($varTag == 'emp_no') {
         $sort_1 = 'employees1.emp_no ASC';
     }
@@ -110,13 +121,31 @@ else {
     $enisset = '';
 }
 if (isset($_GET['d'])){
-    $disset = $_GET['d'];
+    $dTag = $_GET['d'];
+    //$varTags = array("emp_no","first","last","role","dept");
+    if (isset($dTag)) {
+        if (in_array($dTag, $deptsArray)) {
+            $disset = $dTag;
+        } else {
+            $disset = '';
+        }
+    }
+    //$disset = $_GET['d'];
 }
 else {
     $disset = '';
 }
 if (isset($_GET['t'])){
-    $tisset = $_GET['t'];
+    $tTag = $_GET['t'];
+    //$varTags = array("emp_no","first","last","role","dept");
+    if (isset($tTag)) {
+        if (in_array($tTag, $rolessArray)) {
+            $tisset = $tTag;
+        } else {
+            $tisset = '';
+        }
+    }
+    //$tisset = $_GET['t'];
 }
 else {
     $tisset = '';
