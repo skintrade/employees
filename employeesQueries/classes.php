@@ -191,12 +191,12 @@ class checkThoseVars {
         } elseif (($vartocheck  == 'en') && (is_null($getValueIn))) {
             $getValueIn = preg_replace('/\D/','', $getValueIn);
             if ($variant == 'filter') {
-                $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"';
-                return $this->lnsetfilter;
+                $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"\n';
+                return $this->nosetfilter;
             }
             if ($variant == 'sortby') {
-                $this->lnisset = $getValueIn;
-                return $this->lnisset;
+                $this->enisset = $getValueIn;
+                return $this->enisset;
             }
         }
     }
