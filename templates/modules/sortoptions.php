@@ -1,6 +1,17 @@
 <?php
 //include ('./employeesQueries/filterSets.php') ;
-//$varTags = array("emp_no","first","last","role","dept");
+$tsetfilter;
+$dsetfilter;
+$fnsetfilter;
+$lnsetfilter;
+$nosetfilter;
+$fnisset = '';
+$lnisset = '';
+$enisset = '';
+$tisset = '';
+$disset = '';
+$varTags = array("emp_no","first","last","role","dept");
+
 if (isset($varTag)) {
     if (in_array($varTag, $varTags)) {
         //echo 'ok';
@@ -12,7 +23,55 @@ if (isset($varTag)) {
 }
 else {
     $varTag = '';
-} ?>
+}
+
+if (isset($_GET['t'])) {
+    $varToBechecked = 't';
+    $getValue = $_GET['t'];
+    $tvarcheck = new checkThoseVars();
+    $tvarcheck->varCheckerInput($conn3,$_GET['t'],$varToBechecked);
+    $tisset = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $tisset = "";
+}*/
+if (isset($_GET['d'])) {
+    $varToBechecked = 'd';
+    $getValue = $_GET['d'];
+    $dvarcheck = new checkThoseVars();
+    $dvarcheck->varCheckerInput($conn3,$_GET['d'],$varToBechecked);
+    $disset = $dvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $disset = "";
+}*/
+if (isset($_GET['firstname'])) {
+    $varToBechecked = 'fn';
+    $getValue = $_GET['firstname'];
+    $fnvarcheck = new checkThoseVars();
+    $fnvarcheck->varCheckerInput($conn3,$_GET['firstname'],$varToBechecked);
+    $fnisset = $fnvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $fnisset = "";
+}*/
+if (isset($_GET['lastname'])) {
+    $varToBechecked = 'ln';
+    $getValue = $_GET['lastname'];
+    $lnvarcheck = new checkThoseVars();
+    $lnvarcheck->varCheckerInput($conn3,$_GET['lastname'],$varToBechecked);
+    $lnisset = $lnvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $lnisset = "";
+}*/
+if (isset($_GET['empno'])) {
+    $varToBechecked = 'en';
+    $getValue = $_GET['empno'];
+    $envarcheck = new checkThoseVars();
+    $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
+    $enisset = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $enisset = "";
+}*/
+?>
+
 <div class="row">
 <form  class="empSortOpt" id="form_hps" method="get" action="">
     <div class="input-row row">
@@ -29,11 +88,21 @@ else {
         <option value="dept" <?php if ($varTag == 'dept') echo ' selected="selected"'; ?> >Department</option>
         <?php endif; ?>
     </select>
-    <input type="hidden" id="firstname" name="firstname" value="<?php echo $fnisset ?>">
-    <input type="hidden" id="lastname" name="lastname" value="<?php echo $lnisset ?>">
+    <?php  if ($fnisset != '') : ?>
+        <input type="hidden" id="firstname" name="firstname" value="<?php echo $fnisset ?>">
+    <?php endif;?>
+    <?php  if ($lnisset != '') : ?>
+        <input type="hidden" id="lastname" name="lastname" value="<?php echo $lnisset ?>">
+    <?php endif;?>
+    <?php  if ($enisset != '') : ?>
     <input type="hidden" id="empno" name="empno" value="<?php echo $enisset ?>">
+    <?php endif;?>
+    <?php  if ($tisset != '') : ?>
     <input type="hidden" id="t" name="t" value="<?php echo $tisset ?>">
+    <?php endif;?>
+    <?php  if ($disset != '') : ?>
     <input type="hidden" id="d" name="d" value="<?php echo $disset ?>">
+    <?php endif;?>
     <input id="sendForm" class="button_text btn" type="submit"  />
 </div>
 </div>

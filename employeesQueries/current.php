@@ -2,6 +2,60 @@
 include_once ('./employeesQueries/filterSets.php');
 include ('./employeesQueries/classes.php');
 
+//echo 'arg A' ;
+$tsetfilter ='';
+$dsetfilter ='';
+$fnsetfilter ='';
+$lnsetfilter ='';
+$nosetfilter ='';
+$ensetfilter ='';
+
+if (isset($_GET['t'])) {
+    $varToBechecked = 't';
+    $getValue = $_GET['t'];
+    $tvarcheck = new checkThoseVars();
+    $tvarcheck->varCheckerInput($conn3,$_GET['t'],$varToBechecked);
+    $tsetfilter = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
+} else {
+    $tsetfilter = "and title.title is not null\n";
+}
+if (isset($_GET['d'])) {
+    $varToBechecked = 'd';
+    $getValue = $_GET['d'];
+    $dvarcheck = new checkThoseVars();
+    $dvarcheck->varCheckerInput($conn3,$_GET['d'],$varToBechecked);
+    $dsetfilter = $dvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
+} else {
+    $dsetfilter = "and depts.ds_dept_no is not null\n";
+}
+if (isset($_GET['firstname'])) {
+    $varToBechecked = 'fn';
+    $getValue = $_GET['firstname'];
+    $fnvarcheck = new checkThoseVars();
+    $fnvarcheck->varCheckerInput($conn3,$_GET['firstname'],$varToBechecked);
+    $fnsetfilter = $fnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
+} else {
+    $fnsetfilter = "\n";
+}
+if (isset($_GET['lastname'])) {
+    $varToBechecked = 'ln';
+    $getValue = $_GET['lastname'];
+    $lnvarcheck = new checkThoseVars();
+    $lnvarcheck->varCheckerInput($conn3,$_GET['lastname'],$varToBechecked);
+    $lnsetfilter = $lnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
+} else {
+    $lnsetfilter = "\n";
+}
+if (isset($_GET['empno'])) {
+    $varToBechecked = 'en';
+    $getValue = $_GET['empno'];
+    $envarcheck = new checkThoseVars();
+    $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
+    $nosetfilter = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
+} else {
+    $nosetfilter = "\n";
+}
+
 //pagination of records
 if (isset($_GET['pageno'])) {
     $pagnocheck = new pageNumberCheck();

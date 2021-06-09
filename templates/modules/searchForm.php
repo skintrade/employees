@@ -1,4 +1,79 @@
-<?php  include ('./employeesQueries/filterSets.php') ?>
+<?php
+
+require './utilities/dbconn.php';
+
+//include ('./employeesQueries/filterSets.php') ;
+$tsetfilter;
+$dsetfilter;
+$fnsetfilter;
+$lnsetfilter;
+$nosetfilter;
+$fnisset = '';
+$lnisset = '';
+$enisset = '';
+$tisset = '';
+$disset = '';
+$varTags = array("emp_no","first","last","role","dept");
+
+if (isset($varTag)) {
+    if (in_array($varTag, $varTags)) {
+        //echo 'ok';
+        $varTag = $varTag;
+    } else {
+        //echo 'not ok';
+        $varTag = '';
+    }
+}
+else {
+    $varTag = '';
+}
+
+if (isset($_GET['t'])) {
+    $varToBechecked = 't';
+    $getValue = $_GET['t'];
+    $tvarcheck = new checkThoseVars();
+    $tvarcheck->varCheckerInput($conn3,$_GET['t'],$varToBechecked);
+    $tisset = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $tisset = "";
+}*/
+if (isset($_GET['d'])) {
+    $varToBechecked = 'd';
+    $getValue = $_GET['d'];
+    $dvarcheck = new checkThoseVars();
+    $dvarcheck->varCheckerInput($conn3,$_GET['d'],$varToBechecked);
+    $disset = $dvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $disset = "";
+}*/
+if (isset($_GET['firstname'])) {
+    $varToBechecked = 'fn';
+    $getValue = $_GET['firstname'];
+    $fnvarcheck = new checkThoseVars();
+    $fnvarcheck->varCheckerInput($conn3,$_GET['firstname'],$varToBechecked);
+    $fnisset = $fnvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $fnisset = "";
+}*/
+if (isset($_GET['lastname'])) {
+    $varToBechecked = 'ln';
+    $getValue = $_GET['lastname'];
+    $lnvarcheck = new checkThoseVars();
+    $lnvarcheck->varCheckerInput($conn3,$_GET['lastname'],$varToBechecked);
+    $lnisset = $lnvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $lnisset = "";
+}*/
+if (isset($_GET['empno'])) {
+    $varToBechecked = 'en';
+    $getValue = $_GET['empno'];
+    $envarcheck = new checkThoseVars();
+    $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
+    $enisset = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
+} /*else {
+    $enisset = "";
+}*/
+?>
 <form class="empSearch" id="form_hps" method="get" action="current_employees.php">
     <div class="form_description">
         <h3>Search Employees</h3>
