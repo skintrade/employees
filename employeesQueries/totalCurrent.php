@@ -63,6 +63,6 @@ function current_url() {
     $current_url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     return $current_url;
 }
-$uri = currenturl_without_queryparam($param).'&'.$param.'=';
+$uri = currenturl_without_queryparam($param).'?&'.$param.'=';
 
 // end: clean up page number filter
