@@ -6,7 +6,6 @@ include ('./employeesQueries/classes.php');
 if (isset($_GET['pageno'])) {
     $pagnocheck = new pageNumberCheck();
     $pagnocheck->pnocheck1($_GET['pageno']);
-    echo $pagnocheck->getPaginNum();
     $pageno = $pagnocheck->getPaginNum();
 } else {
     $pageno = 1;
@@ -59,9 +58,7 @@ $end = microtime(true);
 $difference = $end - $started;
 $queryTime = number_format($difference, 10);
 
-
 include('./employeesQueries/totalCurrent.php');
-
 include('./templates/modules/paginationControl.php');
 
 echo '<div class="spacerVert centerify">' .

@@ -57,7 +57,7 @@ function currenturl_without_queryparam( $queryparamkey ) {
     } else {
         return $current_url;
     }
-    echo $current_url;
+    //echo $current_url;
 }
 function current_url() {
     $current_url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";

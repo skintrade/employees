@@ -1,6 +1,18 @@
 <?php
+
+include ('./employeesQueries/classes.php');
+
+if (isset($_GET['emp'])) {
+    $empnolinkcl= preg_replace('/\D/','', $_GET['emp']);
+    $singleUserGetter = new getASingleUser();
+    $singleUserGetter->singleUserDump($empnolinkcl);
+    $empnogot = $singleUserGetter->getEmpNum();
+} else {
+    header("Location: ./current_employees.php");
+    exit;
+}
 // CHECK FOR SINGLE USER
-$link = $_GET['emp'];
+$link = $empnogot;
 // GET THE UNIQUE DATA SET
 /*
 timer start - for testing and debugging
