@@ -1,26 +1,17 @@
 <?php
-
-include ('./employeesQueries/filterSets.php');
+include_once ('./employeesQueries/filterSets.php');
+include ('./employeesQueries/classes.php');
 
 //pagination of records
 if (isset($_GET['pageno'])) {
-    if (is_numeric($_GET['pageno']))
-    {
-        $pageno = $_GET['pageno'];
-    }
-    else
-    {
-        $clnpageno = preg_replace('/\D/','', $_GET['pageno']);
-        if (is_numeric ($clnpageno)){
-            $pageno = $clnpageno;
-        }
-        else {
-            $pageno = 1;
-        }
-    }
+    $pagnocheck = new pageNumberCheck();
+    $pagnocheck->pnocheck1($_GET['pageno']);
+    echo $pagnocheck->getPaginNum();
+    $pageno = $pagnocheck->getPaginNum();
 } else {
     $pageno = 1;
 }
+
 $no_of_records_per_page = 30;
 $offset = ($pageno-1) * $no_of_records_per_page;
 

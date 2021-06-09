@@ -1,5 +1,5 @@
 <?php
-include ('./employeesQueries/filterSets.php') ;
+//include ('./employeesQueries/filterSets.php') ;
 //$varTags = array("emp_no","first","last","role","dept");
 if (isset($varTag)) {
     if (in_array($varTag, $varTags)) {

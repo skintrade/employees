@@ -1,5 +1,5 @@
 <?php
-include ('./employeesQueries/filterSets.php');
+//include ('./employeesQueries/filterSets.php');
 
 //get count of current employees for pagination
 $sql2 = "SELECT * FROM dept_emp as dept\n"
