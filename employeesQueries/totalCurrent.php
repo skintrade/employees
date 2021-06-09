@@ -10,6 +10,7 @@ $nosetfilter;
 
 if (isset($_GET['t'])) {
     $varToBechecked = 't';
+    $getValue = $_GET['t'];
     $tvarcheck = new checkThoseVars();
     $tvarcheck->varCheckerInput($conn3,$_GET['t'],$varToBechecked);
     $tsetfilter = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
@@ -47,13 +48,17 @@ if (isset($_GET['empno'])) {
     //echo 'ENEN';
     $varToBechecked = 'en';
     $getValue = $_GET['empno'];
+    $getValue = preg_replace('/\D/','', $getValue);
     $envarcheck = new checkThoseVars();
     $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
     $nosetfilter = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
 } else {
     $nosetfilter = "\n";
 }
-
+/*echo "EXPECTED <br />";
+echo 'tsf: and title.title = "Staff" : dsf: and depts.ds_dept_no is not null : fnf: and employees1.first_name LIKE "Fred%" : lnf: and employees1.last_name LIKE "%" : nof: and employees1.emp_no LIKE "%" : <br />';
+echo "output <br/>";
+*/
 echo 'tsf: ' . $tsetfilter . ' : ' . 'dsf: ' . $dsetfilter . ' : ' . 'fnf: ' . $fnsetfilter . ' : ' . 'lnf: ' . $lnsetfilter . ' : ' . 'nof: ' . $nosetfilter . ' : ';
 
 //get count of current employees for pagination

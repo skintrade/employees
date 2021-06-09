@@ -67,6 +67,7 @@ if (isset($_GET['lastname'])) {
 if (isset($_GET['empno'])) {
     $varToBechecked = 'en';
     $getValue = $_GET['empno'];
+    $getValue = preg_replace('/\D/','', $getValue);
     $envarcheck = new checkThoseVars();
     $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
     $enisset = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');

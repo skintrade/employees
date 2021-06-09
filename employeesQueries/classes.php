@@ -121,59 +121,83 @@ class checkThoseVars {
             if ($variant == 'sortby') {
                 return $this->tisset;
             }
-        } else {
+        } elseif (($vartocheck  == 't') && (is_null($getValueIn)) && (!in_array($getValueIn, $rolessArrayXb))) {
             if ($variant == 'filter') {
                 $this->tsetfilter = "and title.title is not null\n";
+                return $this->tsetfilter;
             }
             if ($variant == 'sortby') {
                 $this->tisset = '';
+                return $this->tisset;
             }
-        }
-        if (($vartocheck  == 'd') && (!is_null($getValueIn)) && (in_array($getValueIn, $deptsArrayXb))) {
+        } elseif (($vartocheck  == 'd') && (!is_null($getValueIn)) && (in_array($getValueIn, $deptsArrayXb))) {
             if ($variant == 'filter') {
                 return $this->dsetfilter;
             }
             if ($variant == 'sortby') {
                 return $this->disset;
             }
-        } else {
+        } elseif (($vartocheck  == 'd') && (!is_null($getValueIn)) && (!in_array($getValueIn, $deptsArrayXb))) {
             if ($variant == 'filter') {
                 $this->dsetfilter = "and depts.ds_dept_no is not null\n";
+                return $this->dsetfilter;
             }
             if ($variant == 'sortby') {
                 $this->disset = '';
+                return $this->disset;
             }
-        }
-        if ($vartocheck  == 'fn') {
+        } elseif (($vartocheck  == 'fn') && (!is_null($getValueIn))){
             if ($variant == 'filter') {
                 return $this->fnsetfilter;
             }
             if ($variant == 'sortby') {
                 return $this->fnisset;
             }
-        } else {
+        } elseif (($vartocheck  == 'fn') && (is_null($getValueIn))){
             if ($variant == 'filter') {
                 $this->fnsetfilter = "\n";
+                return $this->fnsetfilter;
             }
             if ($variant == 'sortby') {
                 $this->fnisset = '';
+                return $this->fnisset;
             }
-        }
-        if ($vartocheck  == 'ln') {
+        } elseif (($vartocheck  == 'ln') && (!is_null($getValueIn))) {
             if ($variant == 'filter') {
                 return $this->lnsetfilter;
             }
             if ($variant == 'sortby') {
                 return $this->lnisset;
             }
-        } else {
+        } elseif (($vartocheck  == 'ln') && (is_null($getValueIn))) {
             if ($variant == 'filter') {
                 $this->lnsetfilter = "\n";
+                return $this->lnsetfilter;
             }
             if ($variant == 'sortby') {
                 $this->lnisset = '';
+                return $this->lnisset;
+            }
+        } elseif (($vartocheck  == 'en') && (!is_null($getValueIn))) {
+            $getValueIn = preg_replace('/\D/','', $getValueIn);
+            if ($variant == 'filter') {
+                $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"';
+                return $this->lnsetfilter;
+            }
+            if ($variant == 'sortby') {
+                $this->lnisset = $getValueIn;
+                return $this->lnisset;
+            }
+        } elseif (($vartocheck  == 'en') && (is_null($getValueIn))) {
+            $getValueIn = preg_replace('/\D/','', $getValueIn);
+            if ($variant == 'filter') {
+                $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"';
+                return $this->lnsetfilter;
+            }
+            if ($variant == 'sortby') {
+                $this->lnisset = $getValueIn;
+                return $this->lnisset;
             }
         }
-
     }
 }

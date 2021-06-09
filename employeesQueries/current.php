@@ -35,7 +35,7 @@ if (isset($_GET['firstname'])) {
     $fnvarcheck->varCheckerInput($conn3,$_GET['firstname'],$varToBechecked);
     $fnsetfilter = $fnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
 } else {
-    $fnsetfilter = "\n";
+    $fnsetfilter = "and employees1.first_name is not null\n";
 }
 if (isset($_GET['lastname'])) {
     $varToBechecked = 'ln';
@@ -44,7 +44,7 @@ if (isset($_GET['lastname'])) {
     $lnvarcheck->varCheckerInput($conn3,$_GET['lastname'],$varToBechecked);
     $lnsetfilter = $lnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
 } else {
-    $lnsetfilter = "\n";
+    $lnsetfilter = "and employees1.last_name is not null\n";
 }
 if (isset($_GET['empno'])) {
     $varToBechecked = 'en';
@@ -53,8 +53,11 @@ if (isset($_GET['empno'])) {
     $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
     $nosetfilter = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
 } else {
-    $nosetfilter = "\n";
-}
+    $nosetfilter = 'and employees1.emp_no LIKE "%"';
+}#
+
+echo 'tsf: ' . $tsetfilter . ' : ' . 'dsf: ' . $dsetfilter . ' : ' . 'fnf: ' . $fnsetfilter . ' : ' . 'lnf: ' . $lnsetfilter . ' : ' . 'nof: ' . $nosetfilter . ' : ';
+
 
 //pagination of records
 if (isset($_GET['pageno'])) {
@@ -89,10 +92,28 @@ $sql = "SELECT distinct * FROM employees as employees1\n"
     . "$fnsetfilter"
     . "$lnsetfilter"
     . "$nosetfilter"
-    . "order by $sort_1 LIMIT $no_of_records_per_page OFFSET $offset";
+    . "order by employees1.emp_no LIMIT $no_of_records_per_page OFFSET $offset";
+    //. "order by $sort_1 LIMIT $no_of_records_per_page OFFSET $offset";
 $result = $conn->query($sql, MYSQLI_USE_RESULT);
 
 include('./templates/modules/listingHeader.php');
+
+if ($result= mysqli_query($conn,$sql)) {
+	// it return number of rows in the table.
+	$row = mysqli_num_rows($result);
+
+    echo $row;
+// for testing purposes - uncomment as required
+	if ($row) {
+        echo "total number of current employees: " .$row;
+	}
+    else {
+        echo "broken";
+    }
+}
+else {
+    echo 'count broken again';
+}
 
 while ($myrow = $result->fetch_array(MYSQLI_ASSOC))
 {
