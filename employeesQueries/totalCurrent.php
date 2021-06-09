@@ -1,6 +1,5 @@
 <?php
 include ('./employeesQueries/filterSets.php');
-//include ('./employeesQueries/classes.php');
 
 $tsetfilter;
 $dsetfilter;
@@ -55,11 +54,6 @@ if (isset($_GET['empno'])) {
 } else {
     $nosetfilter = "\n";
 }
-/*echo "EXPECTED <br />";
-echo 'tsf: and title.title = "Staff" : dsf: and depts.ds_dept_no is not null : fnf: and employees1.first_name LIKE "Fred%" : lnf: and employees1.last_name LIKE "%" : nof: and employees1.emp_no LIKE "%" : <br />';
-echo "output <br/>";
-*/
-echo 'tsf: ' . $tsetfilter . ' : ' . 'dsf: ' . $dsetfilter . ' : ' . 'fnf: ' . $fnsetfilter . ' : ' . 'lnf: ' . $lnsetfilter . ' : ' . 'nof: ' . $nosetfilter . ' : ';
 
 //get count of current employees for pagination
 $sql2 = "SELECT * FROM dept_emp as dept\n"
@@ -79,17 +73,16 @@ $sql2 = "SELECT * FROM dept_emp as dept\n"
 if ($result2= mysqli_query($conn2,$sql2)) {
 	// it return number of rows in the table.
 	$row = mysqli_num_rows($result2);
-
     // for testing purposes - uncomment as required
 	if ($row) {
-        echo "total number of current employees: " .$row;
+        //echo "total number of current employees: " .$row;
 	}
     else {
-        echo "broken";
+        //echo "broken";
     }
 }
 else {
-    echo 'count broken again';
+    //echo 'count broken again';
 }
 $result2->close();
 $conn2->close();

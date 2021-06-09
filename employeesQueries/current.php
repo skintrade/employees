@@ -54,10 +54,7 @@ if (isset($_GET['empno'])) {
     $nosetfilter = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
 } else {
     $nosetfilter = "\n";
-}#
-
-$sort_1 = 'employees1.emp_no ASC';
-
+}
 
 //pagination of records
 if (isset($_GET['pageno'])) {
@@ -67,8 +64,6 @@ if (isset($_GET['pageno'])) {
 } else {
     $pageno = 1;
 }
-
-echo 'tsf: ' . $tsetfilter . ' : ' . 'dsf: ' . $dsetfilter . ' : ' . 'fnf: ' . $fnsetfilter . ' : ' . 'lnf: ' . $lnsetfilter . ' : ' . 'nof: ' . $nosetfilter . ' : ';
 
 $no_of_records_per_page = 30;
 $offset = ($pageno-1) * $no_of_records_per_page;
@@ -95,7 +90,7 @@ $sql = "SELECT distinct * FROM employees as employees1\n"
     . "$lnsetfilter"
     . "$nosetfilter"
     . "order by $sort_1 LIMIT $no_of_records_per_page OFFSET $offset";
-$result = $conn->query($sql, MYSQLI_USE_RESULT);
+$result = $conn->query($sql);
 
 include('./templates/modules/listingHeader.php');
 
@@ -106,10 +101,10 @@ if ($result= mysqli_query($conn,$sql)) {
     //echo $row;
 // for testing purposes - uncomment as required
 	if ($row) {
-        echo "total number of current employees: " .$row;
+        //echo "total number of current employees: " .$row;
 	}
     else {
-        echo "broken";
+        //echo "broken";
     }
 }
 else {
