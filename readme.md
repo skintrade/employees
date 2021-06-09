@@ -27,5 +27,8 @@ The system implemented uses a home page, a main results page, and a page for the
 
 The DB used is 'messy', many of the tables do not have unique keys, and some store data in a manner that would be classed as 'legacy' or redundant in its current location. Ideally this DB would be restructured to organise the content more effectively and reduce query sizes and times.
 
-
 There are some test markers in the code to allow for quick debugging, and while not needed I have kept them 'just in case'.
+
+### post review
+
+There are 2 branches "main" and "updates" - "main" is quick and dirty, "updates" includes some basic sanitization to limit query injection plus some examples of objectifying and class uses to pull functions into their own self contained processes
