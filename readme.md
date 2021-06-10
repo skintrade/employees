@@ -32,3 +32,23 @@ There are some test markers in the code to allow for quick debugging, and while 
 ### post review
 
 There are 2 branches "main" and "updates" - "main" is quick and dirty, "updates" has updated code to tidy up, rationalise, speed up, manage errors, and sanitise input.
+
+## Additional notes on the updates branch
+
+'Long Hand' code base has been tidied and reduced.
+
+"All Employees" Query - time reduced from 3.6s to 2.25s with SQL clean up and rationalisation.
+
+MySQLi functions amended.
+
+Most functions pulled into classes and objects for re-use.
+
+Filter/sort/search logic modified and set up for re-use rather than code duplication.
+
+Custom error reporting function implmented (errorhandler.php);
+
+paginationControl.php updated to deal with a small 'logic' failure.
+
+Additional sanitization and validation on queries/user input & pre-fills, and responses.
+
+.htaccess extended to limit access.
