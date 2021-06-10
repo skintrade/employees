@@ -31,4 +31,4 @@ There are some test markers in the code to allow for quick debugging, and while 
 
 ### post review
 
-There are 2 branches "main" and "updates" - "main" is quick and dirty, "updates" includes some basic sanitization to limit query injection plus some examples of objectifying and class uses to pull functions into their own self contained processes
+There are 2 branches "main" and "updates" - "main" is quick and dirty, "updates" has updated code to tidy up, rationalise, speed up, manage errors, and sanitise input.
