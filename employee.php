@@ -1,5 +1,11 @@
 <?php
 $title = 'Employee data page';
+
+include ('./employeesQueries/mstrvars.php');
+
+include ('./errorhandler.php');
+include ('./employeesQueries/classes.php');
+
 function queryTime()
 {
     $link = $_GET['emp'];

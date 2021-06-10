@@ -19,7 +19,7 @@
                 <div class="row">
                     <div class="col-sm-12 centerify">
                         <div class="boxalpha-inner">
-                        <h2>Sorry but the staff member page you are trying to access does not exist</h4>
+                        <h2>Sorry but the page you are trying to access does not exist</h4>
                         </div>
                     </div>
                     <div class="col-sm-12 centerify spacerVert">

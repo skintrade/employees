@@ -1,4 +1,5 @@
 <?php
+
 class pageNumberCheck {
 
     public function pnocheck1($pchk){
@@ -67,23 +68,24 @@ class checkThoseVars {
             if (in_array($tset, $rolessArrayX)) {
                 $this->tsetfilter = 'and title.title = "'. $tset . '"';
                 $this->tisset = $tset;
+            } else {
+                $this->tsetfilter = "and title.title is not null\n";
+                $this->tisset = '';
             }
-        } else {
-            $this->tsetfilter = "and title.title is not null\n";
-            $this->tisset = '';
         }
         if ($vartocheck  == 'd') {
             $dset = mysqli_real_escape_string($dbconvar, $getter);
             if (in_array($dset, $deptsArrayX)) {
                 $this->dsetfilter = 'and depts.ds_dept_no = "'. $dset . '"';
                 $this->disset = $dset;
+            } else {
+                $this->dsetfilter = "and depts.ds_dept_no is not null\n";
+                $this->disset = '';
             }
-        } else {
-            $this->dsetfilter = "and depts.ds_dept_no is not null\n";
-            $this->disset = '';
         }
         if ($vartocheck  == 'fn') {
             $fnset = mysqli_real_escape_string($dbconvar, $getter);
+            $fnset = preg_replace('/[^a-zA-Z]/','', $fnset);
             $this->fnsetfilter = 'and employees1.first_name LIKE "'. $fnset .'%"';
             $this->fnisset = $fnset;
         } else {
@@ -92,6 +94,7 @@ class checkThoseVars {
         }
         if ($vartocheck  == 'ln') {
             $lnset = mysqli_real_escape_string($dbconvar, $getter);
+            $lnset = preg_replace('/[^a-zA-Z]/','', $lnset);
             $this->lnsetfilter = 'and employees1.last_name LIKE "'. $lnset .'%"';
             $this->lnisset = $lnset;
 
@@ -113,68 +116,71 @@ class checkThoseVars {
     public function varCheckerOutput($vartocheck,$getValueIn, $variant){
         $rolessArrayXb = array("Assistant Engineer","Engineer","Manager","Senior Engineer","Senior Staff","Technique Leader", "Staff");
         $deptsArrayXb = array("d001","d002","d003","d004","d005","d006","d007","d008","d009");
+        $filterArray1 = array("fn","ln","t");
+        $getValueIn = preg_replace('/[?]/','', $getValueIn);
+        if (in_array($getValueIn, $filterArray1)){
+            $getValueIn = preg_replace('/[^a-zA-Z]/','', $getValueIn);
+        }
 
         if (($vartocheck  == 't') && (!is_null($getValueIn)) && (in_array($getValueIn, $rolessArrayXb))) {
             if ($variant == 'filter') {
                 return $this->tsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 return $this->tisset;
             }
-        } elseif (($vartocheck  == 't') && (is_null($getValueIn)) && (!in_array($getValueIn, $rolessArrayXb))) {
+        } elseif (($vartocheck  == 't') && (!in_array($getValueIn, $rolessArrayXb))) {
             if ($variant == 'filter') {
+                if ($getValueIn != ''){
+                    trigger_error("Job Title was incorrect - filter will show all job titles", E_USER_NOTICE);
+                }
                 $this->tsetfilter = "and title.title is not null\n";
                 return $this->tsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->tisset = '';
                 return $this->tisset;
             }
         } elseif (($vartocheck  == 'd') && (!is_null($getValueIn)) && (in_array($getValueIn, $deptsArrayXb))) {
             if ($variant == 'filter') {
                 return $this->dsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 return $this->disset;
             }
         } elseif (($vartocheck  == 'd') && (!is_null($getValueIn)) && (!in_array($getValueIn, $deptsArrayXb))) {
             if ($variant == 'filter') {
+                if ($getValueIn != ''){
+                    trigger_error("Department was incorrect - filter will show all departments", E_USER_NOTICE);
+                }
                 $this->dsetfilter = "and depts.ds_dept_no is not null\n";
                 return $this->dsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->disset = '';
                 return $this->disset;
             }
         } elseif (($vartocheck  == 'fn') && (!is_null($getValueIn))){
             if ($variant == 'filter') {
                 return $this->fnsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 return $this->fnisset;
             }
         } elseif (($vartocheck  == 'fn') && (is_null($getValueIn))){
             if ($variant == 'filter') {
                 $this->fnsetfilter = "\n";
                 return $this->fnsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->fnisset = '';
                 return $this->fnisset;
             }
         } elseif (($vartocheck  == 'ln') && (!is_null($getValueIn))) {
             if ($variant == 'filter') {
                 return $this->lnsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 return $this->lnisset;
             }
         } elseif (($vartocheck  == 'ln') && (is_null($getValueIn))) {
             if ($variant == 'filter') {
                 $this->lnsetfilter = "\n";
                 return $this->lnsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->lnisset = '';
                 return $this->lnisset;
             }
@@ -183,8 +189,7 @@ class checkThoseVars {
             if ($variant == 'filter') {
                 $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"';
                 return $this->lnsetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->lnisset = $getValueIn;
                 return $this->lnisset;
             }
@@ -193,8 +198,7 @@ class checkThoseVars {
             if ($variant == 'filter') {
                 $this->lnsetfilter = 'and employees1.emp_no LIKE "'.$getValueIn.'%"\n';
                 return $this->nosetfilter;
-            }
-            if ($variant == 'sortby') {
+            } elseif ($variant == 'sortby') {
                 $this->enisset = $getValueIn;
                 return $this->enisset;
             }

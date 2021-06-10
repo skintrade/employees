@@ -1,59 +1,4 @@
 <?php
-include ('./employeesQueries/filterSets.php');
-
-$tsetfilter;
-$dsetfilter;
-$fnsetfilter;
-$lnsetfilter;
-$nosetfilter;
-
-if (isset($_GET['t'])) {
-    $varToBechecked = 't';
-    $getValue = $_GET['t'];
-    $tvarcheck = new checkThoseVars();
-    $tvarcheck->varCheckerInput($conn3,$_GET['t'],$varToBechecked);
-    $tsetfilter = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
-} else {
-    $tsetfilter = "and title.title is not null\n";
-}
-if (isset($_GET['d'])) {
-    $varToBechecked = 'd';
-    $getValue = $_GET['d'];
-    $dvarcheck = new checkThoseVars();
-    $dvarcheck->varCheckerInput($conn3,$_GET['d'],$varToBechecked);
-    $dsetfilter = $dvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
-} else {
-    $dsetfilter = "and depts.ds_dept_no is not null\n";
-}
-if (isset($_GET['firstname'])) {
-    $varToBechecked = 'fn';
-    $getValue = $_GET['firstname'];
-    $fnvarcheck = new checkThoseVars();
-    $fnvarcheck->varCheckerInput($conn3,$_GET['firstname'],$varToBechecked);
-    $fnsetfilter = $fnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
-} else {
-    $fnsetfilter = "\n";
-}
-if (isset($_GET['lastname'])) {
-    $varToBechecked = 'ln';
-    $getValue = $_GET['lastname'];
-    $lnvarcheck = new checkThoseVars();
-    $lnvarcheck->varCheckerInput($conn3,$_GET['lastname'],$varToBechecked);
-    $lnsetfilter = $lnvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
-} else {
-    $lnsetfilter = "\n";
-}
-if (isset($_GET['empno'])) {
-    //echo 'ENEN';
-    $varToBechecked = 'en';
-    $getValue = $_GET['empno'];
-    $getValue = preg_replace('/\D/','', $getValue);
-    $envarcheck = new checkThoseVars();
-    $envarcheck->varCheckerInput($conn3,$_GET['empno'],$varToBechecked);
-    $nosetfilter = $envarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
-} else {
-    $nosetfilter = "\n";
-}
 
 //get count of current employees for pagination
 $sql2 = "SELECT * FROM dept_emp as dept\n"
@@ -75,25 +20,29 @@ if ($result2= mysqli_query($conn2,$sql2)) {
 	$row = mysqli_num_rows($result2);
     // for testing purposes - uncomment as required
 	if ($row) {
-        //echo "total number of current employees: " .$row;
+        //trigger_error("0 Results found - please check your search parameters", E_USER_NOTICE);
 	}
     else {
-        //echo "broken";
+        //trigger_error("NO DATA RETURNED", E_USER_WARNING);
     }
 }
 else {
     //echo 'count broken again';
 }
 $result2->close();
-$conn2->close();
+//$conn2->close();
 
-$no_of_records_per_page = 30;
 $total_records = $row;
 $total_pages = ceil($row / $no_of_records_per_page);
+
+/*$no_of_records_per_page = 30;
+$total_records = $row;
+$total_pages = ceil($row / $no_of_records_per_page);*/
 // end: get count of current employees for pagination
 
 // clean up page number filter
 $param = 'pageno';
+
 function currenturl_without_queryparam( $queryparamkey ) {
     $current_url = current_url();
     $parsed_url = parse_url( $current_url );
@@ -110,12 +59,13 @@ function currenturl_without_queryparam( $queryparamkey ) {
     } else {
         return $current_url;
     }
-    //echo $current_url;
 }
 function current_url() {
     $current_url = 'http' . (isset($_SERVER['HTTPS']) ? 's' : '') . '://' . "{$_SERVER['HTTP_HOST']}{$_SERVER['REQUEST_URI']}";
     return $current_url;
 }
+
 $uri = currenturl_without_queryparam($param).'?&'.$param.'=';
+
 
 // end: clean up page number filter

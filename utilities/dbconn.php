@@ -9,7 +9,7 @@ $dbname = "employees";
 // Create connection
 $conn = new mysqli($servername, $username, $password, $dbname);
 $conn2 = new mysqli($servername, $username, $password, $dbname);
-$conn3 = new mysqli($servername, $username, $password, $dbname);
+//$conn3 = new mysqli($servername, $username, $password, $dbname);
 // Check connection
 if ($conn->connect_error) {
   die("Connection failed: " . $conn->connect_error);
@@ -19,6 +19,6 @@ if ($conn2->connect_error) {
   die("Connection failed: " . $conn2->connect_error);
 }
 // Check connection
-if ($conn3->connect_error) {
-  die("Connection failed: " . $conn3->connect_error);
-}
+//if ($conn3->connect_error) {
+// die("Connection failed: " . $conn3->connect_error);
+//}

@@ -1,18 +1,7 @@
 <?php
 
-include ('./employeesQueries/classes.php');
+include ('./employeesQueries/filterSets.php');
 
-if (isset($_GET['emp'])) {
-    $empnolinkcl= preg_replace('/\D/','', $_GET['emp']);
-    $singleUserGetter = new getASingleUser();
-    $singleUserGetter->singleUserDump($empnolinkcl);
-    $empnogot = $singleUserGetter->getEmpNum();
-} else {
-    header("Location: ./current_employees.php");
-    exit;
-}
-// CHECK FOR SINGLE USER
-$link = $empnogot;
 // GET THE UNIQUE DATA SET
 /*
 timer start - for testing and debugging
@@ -29,7 +18,7 @@ $sql = "SELECT distinct * FROM employees as employees1\n"
     . "left join (select emp_no as mgr_emp_no, dept_no as mgr_dept_no, from_date as mgr_from, to_date as mgr_to from dept_manager) as mgr on dept.dept_no=mgr.mgr_dept_no\n"
     . "left join (select emp_no as e2_emp_no, first_name as mgr_first, last_name as mgr_last from employees) as employees2 on employees2.e2_emp_no=mgr.mgr_emp_no\n"
     . "where sals.s_to > current_date()\n"
-    . "and employees1.emp_no = $link\n"
+    . "and employees1.emp_no = $empnogot\n"
     . "and mgr.mgr_to > current_date()\n"
     . "and title.t_to > current_date()\n"
     . "and sals.s_to is not null\n"

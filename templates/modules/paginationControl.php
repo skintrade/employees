@@ -1,6 +1,21 @@
 <div>
     <p class="centerify">
-        <?php echo 'Viewing page: ' .$pageno . ' of ' .$total_pages. ' || '; ?> <?php echo 'records ';?><?php if ($pageno == $total_pages) {echo ((($pageno-1) * 30)+1) . ' to ' . $total_records;} else {echo ((($pageno-1) * 30)+1) . ' to ' . ($pageno* 30) ;}?><?php echo ' (total records: ' .$total_records.')';?>
+        <?php
+        if ($total_records >=1) {
+            echo 'Viewing page: ' .$pageno . ' of ' .$total_pages. ' || ';
+        }else {
+            echo 'Viewing page: 0 of ' .$total_pages. ' || ';
+        }
+        echo 'records ';
+        if (($pageno == $total_pages) && ( $total_records >=1)) {
+            echo ((($pageno-1) * 30)+1) . ' to ' . $total_records;
+        } elseif ($total_records <=0) {
+            echo '0' . ' to ' . ($total_records) ;
+        } else {
+            echo ((($pageno-1) * 30)+1) . ' to ' . ($total_records) ;
+        }
+        echo ' (total records: ' .$total_records.')';
+        ?>
     </p>
 </div>
 <div class="pagination btngroup spacerVert centerify">

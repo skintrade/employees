@@ -24,6 +24,6 @@
     </div>
     <div class="btngroup btngroup-sq spacerVert centerify btngroup-maxi">
         <p class="bold">View all Employees - unfiltered</p>
-        <a href="../../current_employees.php?" class="btn btn-med">View All Current Employees</a>
+        <a href="../../current_employees.php" class="btn btn-med">View All Current Employees</a>
     </div>
 </div>

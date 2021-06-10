@@ -1,14 +1,16 @@
 <?php
 
 $title = 'Employee Listings Home';
+
+include ('./employeesQueries/mstrvars.php');
+
+include ('./errorhandler.php');
+include ('./employeesQueries/classes.php');
+
 function queryTime()
 {
-    // get DB fann_get_total_connections
-    //require 'dbconn.php';
-    //require 'employeesQueries/current.php';
-    //require 'listMain.php';
-}
 
+}
 
 include('./templates/homeTemplate.php');
 ?>
