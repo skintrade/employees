@@ -51,3 +51,5 @@ paginationControl.php updated to deal with a small 'logic' failure.
 Additional sanitization and validation on queries/user input & pre-fills, and responses.
 
 .htaccess extended to limit access.
+
+Currently: 20 files changed, 498 insertions(+), 163 deletions(-) between "updates" and "main" branches.
