@@ -69,7 +69,7 @@ class checkThoseVars {
                 $this->tsetfilter = 'and title.title = "'. $tset . '"';
                 $this->tisset = $tset;
             } else {
-                $this->tsetfilter = "and title.title is not null\n";
+                $this->tsetfilter = "and title.title is not null";
                 $this->tisset = '';
             }
         }

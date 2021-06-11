@@ -24,7 +24,7 @@ if (isset($_GET['t'])) {
     $tsetfilter = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'filter');
     $tisset = $tvarcheck->varCheckerOutput($varToBechecked,$getValue,'sortby');
 } else {
-    $tsetfilter = "and title.title is not null\n";
+    $tsetfilter = "and title.title is not null";
 }
 if (isset($_GET['d'])) {
     $varToBechecked = 'd';
